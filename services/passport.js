@@ -16,6 +16,11 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
+passport.deserializeUser((id, done) => {
+  // Here we are searching id received from cookie in our collections in mongodb
+  User.findById(id).then(user => done(null, user));
+});
+
 passport.use(
   new GoogleStrategy(
     {
