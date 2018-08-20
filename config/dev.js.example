@@ -2,5 +2,7 @@ module.exports = {
   googleClientID: GOOGLE_CLIENT_ID,
   googleClientSecret: GOOGLE_CLIENT_SECRET,
   mongoURI: MONGO_URI,
-  cookieKey: COOKIE_KEY
+  cookieKey: COOKIE_KEY,
+  stripePublishableKey: STRIPE_PUBLISHABLE_KEY,
+  stripeSecretKey: STRIPE_SECRET_KEY
 };
