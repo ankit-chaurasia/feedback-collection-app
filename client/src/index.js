@@ -1,7 +1,6 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
@@ -18,4 +17,3 @@ const provider = (
 );
 
 ReactDOM.render(provider, document.getElementById('root'));
-registerServiceWorker();
