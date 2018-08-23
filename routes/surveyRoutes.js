@@ -5,15 +5,15 @@ const requireCredits = require('../middlewares/requireCredits');
 const Survey = mongoose.model('survey');
 
 module.exports = app => {
-  app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
+  app.post('/api/surveys', requireLogin, requireCredits, (req, res) => {
     const { title, subject, body, recipients } = req.body;
-    const survey = await Survey({
+    const survey = Survey({
       title,
       subject,
       body,
       recipients: recipients.split(',').map(email => ({ email: email.trim() })),
       _user: req.user.id,
       dateSent: Date.now()
-    }).save();
+    });
   });
 };
