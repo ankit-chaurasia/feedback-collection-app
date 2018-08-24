@@ -10,10 +10,9 @@ class Mailer extends helper.Mail {
     this.body = new helper.Content('text/html', content);
     this.recipients = this.formatAddresses(recipients);
 
-    // This is inherited from sendGrid
     this.addContent(this.body);
-    // Set click tracking
     this.addClickTracking();
+    this.addRecipients();
   }
 
   formatAddresses = recipients =>
@@ -24,6 +23,14 @@ class Mailer extends helper.Mail {
     const clickTracking = new helper.ClickTracking(true, true);
     trackingSettings.setClickTracking(clickTracking);
     this.addTrackingSettings(trackingSettings);
+  };
+
+  addRecipients = () => {
+    const personalize = new helper.Personalization();
+    this.recipients.forEach(recipient => {
+      personalize.addTo(recipient);
+    });
+    this.addPersonalization(personalize);
   };
 }
 
