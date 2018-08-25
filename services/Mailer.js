@@ -1,11 +1,12 @@
-const sendGrid = require('sendgrid');
-const { mail: helper } = sendGrid;
+const sendgrid = require('sendgrid');
+const helper = sendgrid.mail;
 const keys = require('../config/keys');
 
 class Mailer extends helper.Mail {
   constructor({ subject, recipients }, content) {
     super();
-    this.sgApi = sendGrid(keys.sendGridKey);
+
+    this.sgApi = sendgrid(keys.sendGridKey);
     this.from_email = new helper.Email('no-reply@emaily.com');
     this.subject = subject;
     this.body = new helper.Content('text/html', content);
@@ -17,7 +18,9 @@ class Mailer extends helper.Mail {
   }
 
   formatAddresses(recipients) {
-    recipients.map(({ email }) => new helper.Email(email));
+    return recipients.map(({ email }) => {
+      return new helper.Email(email);
+    });
   }
 
   addClickTracking() {
@@ -41,7 +44,7 @@ class Mailer extends helper.Mail {
       path: '/v3/mail/send',
       body: this.toJSON()
     });
-    const response = this.sgApi.API(request);
+    const response = await this.sgApi.API(request);
     return response;
   }
 }
