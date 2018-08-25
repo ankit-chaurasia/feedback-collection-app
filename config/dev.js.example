@@ -5,5 +5,6 @@ module.exports = {
   cookieKey: COOKIE_KEY,
   stripePublishableKey: STRIPE_PUBLISHABLE_KEY,
   stripeSecretKey: STRIPE_SECRET_KEY,
-  sendGridKey: SEND_GRID_KEY
+  sendGridKey: SEND_GRID_KEY,
+  redirectDomain: REDIRECT_DOMAIN
 };
