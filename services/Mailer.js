@@ -16,25 +16,26 @@ class Mailer extends helper.Mail {
     this.addRecipients();
   }
 
-  formatAddresses = recipients =>
+  formatAddresses(recipients) {
     recipients.map(({ email }) => new helper.Email(email));
+  }
 
-  addClickTracking = () => {
+  addClickTracking() {
     const trackingSettings = new helper.TrackingSettings();
     const clickTracking = new helper.ClickTracking(true, true);
     trackingSettings.setClickTracking(clickTracking);
     this.addTrackingSettings(trackingSettings);
-  };
+  }
 
-  addRecipients = () => {
+  addRecipients() {
     const personalize = new helper.Personalization();
     this.recipients.forEach(recipient => {
       personalize.addTo(recipient);
     });
     this.addPersonalization(personalize);
-  };
+  }
 
-  send = async () => {
+  async send() {
     const request = this.sgApi.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
@@ -42,7 +43,7 @@ class Mailer extends helper.Mail {
     });
     const response = this.sgApi.API(request);
     return response;
-  };
+  }
 }
 
 module.exports = Mailer;
