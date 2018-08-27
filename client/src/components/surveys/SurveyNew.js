@@ -9,7 +9,15 @@ export default class SurveyNew extends Component {
 
   renderContent = () => {
     if (this.state.showFormReview) {
-      return <SurveyFormReview />;
+      return (
+        <SurveyFormReview
+          onCancel={() => {
+            this.setState(() => ({
+              showFormReview: false
+            }));
+          }}
+        />
+      );
     }
     return (
       <SurveyForm
