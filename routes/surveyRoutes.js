@@ -1,7 +1,7 @@
+const mongoose = require('mongoose');
 const _ = require('lodash');
 const Path = require('path-parser');
 const { URL } = require('url');
-const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const requireCredits = require('../middlewares/requireCredits');
 const Mailer = require('../services/Mailer');
