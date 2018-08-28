@@ -15,11 +15,19 @@ module.exports = app => {
   });
 
   app.post('/api/surveys/webhooks', (req, res) => {
-    const events = _.map(req.body, event => {
-      const pathname = new URL(event.url).pathname;
+    const events = _.map(req.body, ({ email, url }) => {
+      const pathname = new URL(url).pathname;
       const p = new Path('/api/surveys/:surveyId/:choice');
-      console.log(p.test(pathname));
+      const match = p.test(pathname);
+      if (match) {
+        return {
+          email,
+          surveyId: match.surveyId,
+          choice: match.choice
+        };
+      }
     });
+    console.log(events);
   });
 
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
