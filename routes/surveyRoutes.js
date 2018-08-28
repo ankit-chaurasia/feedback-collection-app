@@ -27,7 +27,12 @@ module.exports = app => {
         };
       }
     });
-    console.log(events);
+    // Remove null/undfined entries from events array
+    const compactEvents = _.compact(events);
+    // Remove duplicate events based on email and surveyId
+    const uniqueEvents = _.uniqBy(compactEvents, 'email', 'surveyId');
+    console.log(uniqueEvents);
+    res.send({});
   });
 
   app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
