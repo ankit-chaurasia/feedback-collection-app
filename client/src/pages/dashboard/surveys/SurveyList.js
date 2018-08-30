@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSurveys } from '../../../actions';
+import {
+  Button,
+  Card,
+  Image,
+  Container,
+  Grid,
+  Segment
+} from 'semantic-ui-react';
 
 class SurveyList extends Component {
   componentDidMount() {
@@ -11,29 +19,41 @@ class SurveyList extends Component {
       .reverse()
       .map(({ _id, title, body, dateSent, yes, no }) => {
         return (
-          <div className="row" key={_id}>
-            <div className="col s12">
-              <div className="card blue-grey darken-1">
-                <div className="card-content white-text">
-                  <span className="card-title">{title}</span>
-                  <p>{body}</p>
-                  <p className="right">
-                    Sent on: {new Date(dateSent).toLocaleDateString()}
-                  </p>
-                </div>
-                <div className="card-action">
-                  <a href="#">yes: {yes}</a>
-                  <a href="#">No: {no}</a>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Grid.Row key={_id}>
+            <Grid.Column width={14}>
+              <Card href="#card-example-link-card" fluid={true}>
+                <Card.Content>
+                  <Card.Header>{title}</Card.Header>
+                  <Card.Meta>
+                    Send On: {new Date(dateSent).toLocaleDateString()}
+                  </Card.Meta>
+                  <Card.Description>{body}</Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                  <div className="ui two buttons">
+                    <Button basic color="green">
+                      YES: {yes}
+                    </Button>
+                    <Button basic color="red">
+                      NO: {no}
+                    </Button>
+                  </div>
+                </Card.Content>
+              </Card>
+            </Grid.Column>
+          </Grid.Row>
         );
       });
   };
 
   render() {
-    return <div>{this.renderSurveys()}</div>;
+    return (
+      <Segment style={{ padding: '8em 0em' }} vertical>
+        <Grid container stackable verticalAlign="middle">
+          <Container>{this.renderSurveys()}</Container>
+        </Grid>
+      </Segment>
+    );
   }
 }
 
