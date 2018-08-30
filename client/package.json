@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "materialize-css": "^0.100.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-redux": "^5.0.7",
@@ -21,7 +20,9 @@
     "react-stripe-checkout": "^2.6.3",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "semantic-ui-css": "^2.3.3",
+    "semantic-ui-react": "^0.82.3"
   },
   "scripts": {
     "start": "react-scripts start",
