@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Container, Menu, Image } from 'semantic-ui-react';
 import Payments from '../.././Payments';
-import '../stylesheets/index.scss';
+import '../stylesheets/index.css';
 
 class PageHeaderDesktop extends Component {
   renderContent = () => {
