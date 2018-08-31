@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSurveys } from '../../../actions';
-import { Button, Card, Container, Grid, Segment } from 'semantic-ui-react';
+import { Button, Card, Grid, Segment } from 'semantic-ui-react';
 
 class SurveyList extends Component {
   componentDidMount() {
@@ -13,7 +13,7 @@ class SurveyList extends Component {
       .map(({ _id, title, body, dateSent, yes, no }) => {
         return (
           <Grid.Row key={_id}>
-            <Grid.Column width={14}>
+            <Grid.Column width={16}>
               <Card href="#card-example-link-card" fluid={true}>
                 <Card.Content>
                   <Card.Header>{title}</Card.Header>
@@ -41,9 +41,9 @@ class SurveyList extends Component {
 
   render() {
     return (
-      <Segment style={{ padding: '8em 0em' }} vertical>
+      <Segment style={{ padding: '5em 0em' }} vertical>
         <Grid container stackable verticalAlign="middle">
-          <Container>{this.renderSurveys()}</Container>
+          {this.renderSurveys()}
         </Grid>
       </Segment>
     );

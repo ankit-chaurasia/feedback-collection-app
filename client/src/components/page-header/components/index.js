@@ -34,7 +34,10 @@ class PageHeaderDesktop extends Component {
         return (
           <React.Fragment>
             <Menu.Item>
-              <Link to="/surveys">Surveys</Link>
+              <Link to="/surveys/new">Create New Survey</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/surveys">My Surveys</Link>
             </Menu.Item>
             <Menu.Item>
               <div style={{ margin: '0 10px' }}>
