@@ -1,5 +1,5 @@
 import React from 'react';
-import SurveyList from './surveys/SurveyList';
+import SurveyList from '../surveys/survey-list';
 import { Container } from 'semantic-ui-react';
 import ResponsiveContainer from '../../components/responsive-container';
 

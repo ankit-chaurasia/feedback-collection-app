@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSurveys } from '../../../actions';
-import { Button, Card, Grid, Segment } from 'semantic-ui-react';
+import { Button, Card, Grid } from 'semantic-ui-react';
 
 class SurveyList extends Component {
   componentDidMount() {
@@ -41,11 +41,9 @@ class SurveyList extends Component {
 
   render() {
     return (
-      <Segment style={{ padding: '5em 0em' }} vertical>
-        <Grid container stackable verticalAlign="middle">
-          {this.renderSurveys()}
-        </Grid>
-      </Segment>
+      <Grid container stackable verticalAlign="middle">
+        {this.renderSurveys()}
+      </Grid>
     );
   }
 }

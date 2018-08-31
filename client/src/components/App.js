@@ -5,7 +5,7 @@ import * as actions from '../actions';
 
 import Landing from '../pages/landing';
 import Dashboard from '../pages/dashboard';
-import SurveyNew from '../pages/dashboard/surveys/SurveyNew';
+import SurveyNew from '../pages/surveys/survey-new';
 
 class App extends Component {
   componentDidMount() {

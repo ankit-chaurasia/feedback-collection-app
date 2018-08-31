@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Responsive, Segment, Visibility } from 'semantic-ui-react';
+import { Responsive, Segment, Visibility, Container } from 'semantic-ui-react';
 import PageHeaderDesktop from '../page-header/components';
 
 class DesktopContainer extends Component {
@@ -31,8 +31,11 @@ class DesktopContainer extends Component {
             <PageHeaderDesktop fixed={fixed} />
           </Segment>
         </Visibility>
-
-        {children}
+        <Container>
+          <Segment style={{ padding: '5em 0em' }} vertical>
+            {children}
+          </Segment>
+        </Container>
       </Responsive>
     );
   }
