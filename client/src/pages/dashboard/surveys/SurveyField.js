@@ -1,14 +1,13 @@
 // SurveyField contains login to render a single label and text input
 import React from 'react';
+import { Form } from 'semantic-ui-react';
+import '../../../stylesheets/index.css';
 
 export default ({ input, label, meta: { error, touched } }) => {
   return (
-    <div>
-      <label>{label}</label>
-      <input {...input} style={{ marginBottom: '5px' }} />
-      <div className="red-text" style={{ marginBottom: '20px' }}>
-        {touched && error}
-      </div>
-    </div>
+    <React.Fragment>
+      <Form.Input fluid label={label} placeholder={label} {...input} />
+      {touched && !!error && <span className="errorMessage">{error}</span>}
+    </React.Fragment>
   );
 };
