@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Container, Menu } from 'semantic-ui-react';
+import { Button, Container, Menu, Image } from 'semantic-ui-react';
 import Payments from '../.././Payments';
+import '../stylesheets/index.scss';
 
 class PageHeaderDesktop extends Component {
   renderContent = () => {
@@ -59,14 +60,16 @@ class PageHeaderDesktop extends Component {
         size="large"
       >
         <Container>
-          <Menu.Item active>
-            <Link to="/">Home</Link>
+          <Menu.Item header>
+            <Link to="/" className="siteLogo">
+              <Image
+                size="mini"
+                src={`${process.env.PUBLIC_URL}/favicon.ico`}
+                style={{ marginRight: '1.5em' }}
+              />
+              <div className="title">EMAILY</div>
+            </Link>
           </Menu.Item>
-          <Menu.Item>
-            <Link to="/surveys">Dashboard</Link>
-          </Menu.Item>
-          <Menu.Item as="a">Company</Menu.Item>
-          <Menu.Item as="a">Careers</Menu.Item>
           <Menu.Item position="right">{this.renderContent()}</Menu.Item>
         </Container>
       </Menu>

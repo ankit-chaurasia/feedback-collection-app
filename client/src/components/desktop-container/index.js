@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Responsive, Segment, Visibility } from 'semantic-ui-react';
-import HomepageHeading from '../home-page-heading';
-import PageHeaderDesktop from '../page-header/desktop';
+import PageHeaderDesktop from '../page-header/components';
 
 class DesktopContainer extends Component {
   state = {};
@@ -26,11 +25,10 @@ class DesktopContainer extends Component {
           <Segment
             inverted
             textAlign="center"
-            style={{ minHeight: 700, padding: '1em 0em' }}
+            style={{ padding: '1em 0em' }}
             vertical
           >
             <PageHeaderDesktop fixed={fixed} />
-            <HomepageHeading />
           </Segment>
         </Visibility>
 

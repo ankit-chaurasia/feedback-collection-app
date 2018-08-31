@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSurveys } from '../../../actions';
-import {
-  Button,
-  Card,
-  Image,
-  Container,
-  Grid,
-  Segment
-} from 'semantic-ui-react';
+import { Button, Card, Container, Grid, Segment } from 'semantic-ui-react';
 
 class SurveyList extends Component {
   componentDidMount() {
