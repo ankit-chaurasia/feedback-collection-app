@@ -25,7 +25,7 @@ class DesktopContainer extends Component {
           <Segment
             inverted
             textAlign="center"
-            style={{ padding: '1em 0em' }}
+            style={{ padding: '0' }}
             vertical
           >
             <PageHeaderDesktop fixed={fixed} />

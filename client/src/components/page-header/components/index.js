@@ -13,37 +13,50 @@ class PageHeaderDesktop extends Component {
       case false:
         return (
           <React.Fragment>
-            <Button as="a" inverted={!this.props.fixed} href="/auth/google">
-              Log in
-            </Button>
-            <Button
-              as="a"
-              inverted={!this.props.fixed}
-              primary={this.props.fixed}
-              style={{ marginLeft: '0.5em' }}
-            >
-              Sign Up
-            </Button>
+            <Menu.Item>
+              <Button as="a" inverted={!this.props.fixed} href="/auth/google">
+                Log in
+              </Button>
+            </Menu.Item>
+            <Menu.Item>
+              <Button
+                as="a"
+                inverted={!this.props.fixed}
+                primary={this.props.fixed}
+                style={{ marginLeft: '0.5em' }}
+              >
+                Sign Up
+              </Button>
+            </Menu.Item>
           </React.Fragment>
         );
       default:
         return (
           <React.Fragment>
-            <Button as="a" inverted={!this.props.fixed} color="green">
-              <Payments />
-            </Button>
-            <div style={{ margin: '0 10px' }}>
-              Credits: {this.props.auth.credits}
-            </div>
-            <Button
-              as="a"
-              href="/api/logout"
-              inverted={!this.props.fixed}
-              primary={this.props.fixed}
-              style={{ marginLeft: '0.5em' }}
-            >
-              Logout
-            </Button>
+            <Menu.Item>
+              <Link to="/surveys">Surveys</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <div style={{ margin: '0 10px' }}>
+                Credits: {this.props.auth.credits}
+              </div>
+            </Menu.Item>
+            <Menu.Item>
+              <Button as="a" inverted={!this.props.fixed} color="green">
+                <Payments />
+              </Button>
+            </Menu.Item>
+            <Menu.Item>
+              <Button
+                as="a"
+                href="/api/logout"
+                inverted={!this.props.fixed}
+                primary={this.props.fixed}
+                style={{ marginLeft: '0.5em' }}
+              >
+                Logout
+              </Button>
+            </Menu.Item>
           </React.Fragment>
         );
     }
@@ -55,7 +68,6 @@ class PageHeaderDesktop extends Component {
       <Menu
         fixed={fixed ? 'top' : null}
         inverted={!fixed}
-        pointing={!fixed}
         secondary={!fixed}
         size="large"
       >
@@ -70,7 +82,7 @@ class PageHeaderDesktop extends Component {
               <div className="title">EMAILY</div>
             </Link>
           </Menu.Item>
-          <Menu.Item position="right">{this.renderContent()}</Menu.Item>
+          <Menu.Menu position="right">{this.renderContent()}</Menu.Menu>
         </Container>
       </Menu>
     );
