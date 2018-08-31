@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, Header, List, Icon } from 'semantic-ui-react';
-import formFields from '../survey-list/formFields';
+import formFields from './utils/formFields';
 import { submitSurvey } from '../../../actions';
 import './stylesheets/index.css';
 

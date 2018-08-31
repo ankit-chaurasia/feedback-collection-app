@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
-import SurveyForm from './SurveyForm';
+import SurveyForm from './survey-form';
 import SurveyFormReview from './SurveyFormReview';
 import ResponsiveContainer from '../../../components/responsive-container';
 
