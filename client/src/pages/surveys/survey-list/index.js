@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchSurveys } from '../../../actions';
 import { Card, Grid, Button, Icon } from 'semantic-ui-react';
@@ -23,9 +24,8 @@ class SurveyList extends Component {
                   <Card.Description>{body}</Card.Description>
                 </Card.Content>
                 <Card.Content extra>
-                  <Icon name="thumbs up outline" color="green" />
-                  YES: {yes} | <Icon name="thumbs down outline" color="red" />
-                  NO: {no}
+                  <Icon name="thumbs up outline" color="green" />: {yes} |
+                  <Icon name="thumbs down outline" color="red" />: {no}
                   <Button
                     animated="fade"
                     color="red"
@@ -43,10 +43,12 @@ class SurveyList extends Component {
                     floated="right"
                     size="mini"
                   >
-                    <Button.Content visible>Edit</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name="edit" />
-                    </Button.Content>
+                    <Link to={`/survey/edit/${_id}`} style={{ color: '#fff' }}>
+                      <Button.Content visible>Edit</Button.Content>
+                      <Button.Content hidden>
+                        <Icon name="edit" />
+                      </Button.Content>
+                    </Link>
                   </Button>
                 </Card.Content>
               </Card>

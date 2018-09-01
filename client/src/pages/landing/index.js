@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Header, List, Segment } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 import ResponsiveContainer from '../../components/responsive-container';
 
 const Landing = () => (
