@@ -32,23 +32,34 @@ module.exports = app => {
 
   app.put('/api/survey/edit', requireLogin, async (req, res) => {
     const { title, subject, body, recipients, surveyId } = req.body;
-    const survey = await Survey.findOneAndUpdate(
+    const recipientsArr = recipients
+      .split(',')
+      .map(email => ({ email: email.trim() }));
+    await Survey.updateOne(
       {
         _id: surveyId
       },
       {
-        $set: { title: title },
-        $set: { body: body },
-        $set: { subject: subject },
-        $set: {
-          recipients: recipients
-            .split(',')
-            .map(email => ({ email: email.trim() }))
-        }
-      }
+        title: title,
+        body: body,
+        subject: subject,
+        recipients: recipientsArr,
+        dateSent: Date.now()
+      },
+      { returnNewDocument: false }
     ).exec();
-    survey.save();
-    res.send({ message: 'Survey updated successfully.' });
+    const mailer = new Mailer(
+      { subject, recipients: recipientsArr },
+      surveyTemplate({ body, id: surveyId })
+    );
+    try {
+      await mailer.send();
+      req.user.credits -= 1;
+      const user = await req.user.save();
+      res.send(user);
+    } catch (err) {
+      res.status(422).send({ err });
+    }
   });
 
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
