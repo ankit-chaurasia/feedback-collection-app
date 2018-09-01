@@ -43,7 +43,11 @@ class SurveyForm extends Component {
 
 const validate = values => {
   const errors = {};
-  errors.recipients = validateEmails(values.recipients || '');
+  const recipients =
+    values.recipients && values.recipients[0] && values.recipients[0].email
+      ? values.recipients[0].email
+      : values.recipients;
+  errors.recipients = validateEmails(recipients || '');
   _.each(formFields, ({ name }) => {
     if (!values[name]) {
       errors[name] = 'You must provide a value';
@@ -54,6 +58,5 @@ const validate = values => {
 
 export default reduxForm({
   validate,
-  form: 'surveyForm',
-  destroyOnUnmount: false
+  form: 'surveyForm'
 })(SurveyForm);

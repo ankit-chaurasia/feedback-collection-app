@@ -17,6 +17,40 @@ module.exports = app => {
     res.send(surveys);
   });
 
+  app.get('/api/survey', requireLogin, async (req, res) => {
+    const survey = await Survey.find({
+      _user: req.user.id,
+      _id: req.query.surveyId
+    }).select({
+      yes: false,
+      no: false,
+      dateSent: false,
+      lastResponded: false
+    });
+    res.send(survey);
+  });
+
+  app.put('/api/survey/edit', requireLogin, async (req, res) => {
+    const { title, subject, body, recipients, surveyId } = req.body;
+    const survey = await Survey.findOneAndUpdate(
+      {
+        _id: surveyId
+      },
+      {
+        $set: { title: title },
+        $set: { body: body },
+        $set: { subject: subject },
+        $set: {
+          recipients: recipients
+            .split(',')
+            .map(email => ({ email: email.trim() }))
+        }
+      }
+    ).exec();
+    survey.save();
+    res.send({ message: 'Survey updated successfully.' });
+  });
+
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!!');
   });
