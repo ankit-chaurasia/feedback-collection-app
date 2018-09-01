@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import _ from 'lodash';
 import SurveyForm from './survey-form';
 import SurveyFormReview from './SurveyFormReview';
 import ResponsiveContainer from '../../../components/responsive-container';
@@ -50,9 +51,20 @@ SurveyNew = reduxForm({
   enableReinitialize: true
 })(SurveyNew);
 
-const mapStateToProps = ({ surveys }) => ({
-  initialValues: surveys[0]
-});
+const mapStateToProps = ({ surveys }) => {
+  let recipients = [];
+  if (surveys[0] && surveys[0].recipients) {
+    _.each(surveys[0].recipients, ({ email }) => {
+      recipients.push(email);
+    });
+  }
+  return {
+    initialValues: {
+      ...surveys[0],
+      recipients: recipients.join(', ')
+    }
+  };
+};
 
 export default connect(
   mapStateToProps,
