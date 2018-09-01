@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { Button, Container, Header, Icon } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Container, Header, Button, Icon } from 'semantic-ui-react';
 
 const HomepageHeading = ({ mobile }) => (
   <Container text>
@@ -11,8 +11,7 @@ const HomepageHeading = ({ mobile }) => (
       style={{
         fontSize: mobile ? '2em' : '4em',
         fontWeight: 'normal',
-        marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em'
+        marginBottom: 0
       }}
     />
     <Header
