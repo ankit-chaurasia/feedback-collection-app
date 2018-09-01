@@ -28,7 +28,6 @@ class SurveyNew extends Component {
             showFormReview: true
           }));
         }}
-        surveyId={this.props.match.params.surveyId}
       />
     );
   };

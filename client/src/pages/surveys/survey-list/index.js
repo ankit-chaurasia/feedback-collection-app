@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { fetchSurveys } from '../../../actions';
+import { fetchSurveys } from '../../../actions/surveyActions';
 import { Card, Grid, Button, Icon } from 'semantic-ui-react';
 
 class SurveyList extends Component {

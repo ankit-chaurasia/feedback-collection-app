@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, Header, List, Icon } from 'semantic-ui-react';
 import formFields from './utils/formFields';
-import { submitSurvey } from '../../../actions';
+import { createSurvey } from '../../../actions/surveyActions';
 import './stylesheets/index.css';
 
-const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
+const SurveyFormReview = ({ onCancel, formValues, createSurvey, history }) => {
   const reviewFields = _.map(formFields, ({ label, name }) => {
     return (
       <List.Item key={name} className="listItem">
@@ -41,7 +41,7 @@ const SurveyFormReview = ({ onCancel, formValues, submitSurvey, history }) => {
         labelPosition="right"
         icon="right mail"
         content="Send Survey"
-        onClick={() => submitSurvey(formValues, history)}
+        onClick={() => createSurvey(formValues, history)}
       />
     </div>
   );
@@ -51,5 +51,5 @@ const mapStateToProps = ({ form }) => ({ formValues: form.surveyForm.values });
 
 export default connect(
   mapStateToProps,
-  { submitSurvey }
+  { createSurvey }
 )(withRouter(SurveyFormReview));
