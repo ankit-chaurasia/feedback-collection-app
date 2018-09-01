@@ -7,9 +7,10 @@ export const createSurvey = (values, history) => async dispatch => {
   dispatch({ type: FETCH_USER, payload: res.data });
 };
 
-export const updateSurvey = values => async dispatch => {
+export const updateSurvey = (values, history) => async dispatch => {
   const res = await axios.put('/api/survey/edit', values);
-  // dispatch({ type: FETCH_USER, payload: res.data });
+  history.push('/surveys');
+  dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 export const fetchSurveys = () => async dispatch => {

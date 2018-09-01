@@ -48,15 +48,18 @@ const SurveyFormReview = ({
         floated="right"
         labelPosition="right"
         icon="right mail"
-        content="Send Survey"
+        content={mode === 'create' ? 'Send Survey' : 'Send Updated Survey'}
         onClick={
           mode === 'create'
             ? () => createSurvey(formValues, history)
             : () =>
-                updateSurvey({
-                  ...formValues,
-                  surveyId
-                })
+                updateSurvey(
+                  {
+                    ...formValues,
+                    surveyId
+                  },
+                  history
+                )
         }
       />
     </div>
