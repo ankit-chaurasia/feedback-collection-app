@@ -10,7 +10,7 @@ import {
   Sidebar,
   Image
 } from 'semantic-ui-react';
-import Payments from '../Payments';
+import Payments from '../payments';
 import './stylesheets/index.css';
 
 class SideBarMobile extends Component {

@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import StripeCheckout from 'react-stripe-checkout';
 import { connect } from 'react-redux';
-import { handleStripeToken } from '../actions/paymentActions';
+import { handleStripeToken } from '../../actions/paymentActions';
 
 class Payments extends Component {
+  static propTypes = {
+    title: PropTypes.string
+  };
+  static defaultProps = {
+    title: 'Add Credits'
+  };
   render() {
     return (
       <StripeCheckout
@@ -13,9 +20,8 @@ class Payments extends Component {
         currency="USD"
         token={token => this.props.handleStripeToken(token)}
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
-        ComponentClass="div"
       >
-        <span className="btn">Add Credits</span>
+        <span>{this.props.title}</span>
       </StripeCheckout>
     );
   }

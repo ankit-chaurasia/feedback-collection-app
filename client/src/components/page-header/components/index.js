@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Label, Container, Menu, Image } from 'semantic-ui-react';
-import Payments from '../.././Payments';
+import Payments from '../../payments';
 import '../stylesheets/index.css';
 
 class PageHeaderDesktop extends Component {
