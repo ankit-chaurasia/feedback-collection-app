@@ -7,10 +7,10 @@ import '../stylesheets/index.css';
 
 class PageHeaderDesktop extends Component {
   renderContent = () => {
-    switch (this.props.auth) {
+    switch (this.props.auth._id) {
       case null:
         return;
-      case false:
+      case undefined:
         return (
           <React.Fragment>
             <Menu.Item
