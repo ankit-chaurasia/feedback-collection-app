@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Container, Menu, Image } from 'semantic-ui-react';
+import { Label, Container, Menu, Image } from 'semantic-ui-react';
 import Payments from '../.././Payments';
 import '../stylesheets/index.css';
 
@@ -13,53 +13,39 @@ class PageHeaderDesktop extends Component {
       case false:
         return (
           <React.Fragment>
-            <Menu.Item>
-              <Button as="a" inverted={!this.props.fixed} href="/auth/google">
-                Log in
-              </Button>
-            </Menu.Item>
-            <Menu.Item>
-              <Button
-                as="a"
-                inverted={!this.props.fixed}
-                primary={this.props.fixed}
-                style={{ marginLeft: '0.5em' }}
-              >
-                Sign Up
-              </Button>
-            </Menu.Item>
+            <Menu.Item
+              link
+              icon="sign-in"
+              as="a"
+              href="/auth/google"
+              name="Log in"
+            />
+            <Menu.Item link icon="signup" as="a" name="Sign Up" />
           </React.Fragment>
         );
       default:
         return (
           <React.Fragment>
+            <Menu.Item
+              link
+              as={Link}
+              to="/surveys/new"
+              name="Create New Survey"
+            />
+            <Menu.Item link as={Link} to="/surveys/" name="My Surveys" />
             <Menu.Item>
-              <Link to="/surveys/new">Create New Survey</Link>
+              Credits: <Label color="teal">{this.props.auth.credits}</Label>
             </Menu.Item>
-            <Menu.Item>
-              <Link to="/surveys">My Surveys</Link>
+            <Menu.Item link>
+              <Payments />
             </Menu.Item>
-            <Menu.Item>
-              <div style={{ margin: '0 10px' }}>
-                Credits: {this.props.auth.credits}
-              </div>
-            </Menu.Item>
-            <Menu.Item>
-              <Button as="a" inverted={!this.props.fixed} color="green">
-                <Payments />
-              </Button>
-            </Menu.Item>
-            <Menu.Item>
-              <Button
-                as="a"
-                href="/api/logout"
-                inverted={!this.props.fixed}
-                primary={this.props.fixed}
-                style={{ marginLeft: '0.5em' }}
-              >
-                Logout
-              </Button>
-            </Menu.Item>
+            <Menu.Item
+              link
+              icon="sign-out"
+              as="a"
+              href="/api/logout"
+              name="Logout"
+            />
           </React.Fragment>
         );
     }

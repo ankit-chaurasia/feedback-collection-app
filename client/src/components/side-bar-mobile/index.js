@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
-  Button,
+  Label,
   Container,
   Icon,
   Menu,
@@ -31,36 +31,48 @@ class SideBarMobile extends Component {
       case false:
         return (
           <React.Fragment>
-            <Menu.Item>
-              <a href="/auth/google">Log in</a>
-            </Menu.Item>
-            <Menu.Item>
-              <a>Sign Up</a>
-            </Menu.Item>
+            <Menu.Item
+              link
+              icon="sign-in"
+              as="a"
+              href="/auth/google"
+              name="Log in"
+            />
+            <Menu.Item link icon="signup" as="a" name="Sign Up" />
           </React.Fragment>
         );
       default:
         return (
           <React.Fragment>
+            <Menu.Item
+              link
+              as={Link}
+              to="/surveys/new"
+              name="Create New Survey"
+              icon="plus circle"
+            />
+            <Menu.Item
+              link
+              as={Link}
+              to="/surveys/"
+              name="My Surveys"
+              icon="list"
+            />
             <Menu.Item>
-              <Link to="/surveys/new">Create New Survey</Link>
+              <Label color="teal">{this.props.auth.credits}</Label>
+              Credits
             </Menu.Item>
-            <Menu.Item>
-              <Link to="/surveys">My Surveys</Link>
+            <Menu.Item link>
+              <Icon name="payment" />
+              <Payments />
             </Menu.Item>
-            <Menu.Item>
-              <div style={{ margin: '0 10px' }}>
-                Credits: {this.props.auth.credits}
-              </div>
-            </Menu.Item>
-            <Menu.Item>
-              <Button as="a" inverted={!this.props.fixed} color="green">
-                <Payments />
-              </Button>
-            </Menu.Item>
-            <Menu.Item>
-              <a href="/api/logout">Logout</a>
-            </Menu.Item>
+            <Menu.Item
+              link
+              icon="sign-out"
+              as="a"
+              href="/api/logout"
+              name="Logout"
+            />
           </React.Fragment>
         );
     }

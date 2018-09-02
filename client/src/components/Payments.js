@@ -13,6 +13,7 @@ class Payments extends Component {
         currency="USD"
         token={token => this.props.handleStripeToken(token)}
         stripeKey={process.env.REACT_APP_STRIPE_KEY}
+        ComponentClass="div"
       >
         <span className="btn">Add Credits</span>
       </StripeCheckout>
