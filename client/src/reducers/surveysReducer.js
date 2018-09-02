@@ -1,11 +1,25 @@
-import { FETCH_SURVEYS, FETCH_SURVEY } from '../actions/actionTypes';
+import {
+  FETCH_SURVEYS,
+  FETCH_SURVEY,
+  OPEN_DELETE_SURVEY_MODAL,
+  CLOSE_DELETE_SURVEY_MODAL
+} from '../actions/actionTypes';
 
-export default (state = [], action) => {
+const surveyDefaultState = {
+  surveyList: [],
+  showSurveyDeleteModal: false
+};
+
+export default (state = surveyDefaultState, action) => {
   switch (action.type) {
     case FETCH_SURVEYS:
-      return action.payload;
+      return { ...state, surveyList: action.payload };
     case FETCH_SURVEY:
-      return action.payload;
+      return { ...state, surveyList: action.payload };
+    case OPEN_DELETE_SURVEY_MODAL:
+      return { ...state, showSurveyDeleteModal: true };
+    case CLOSE_DELETE_SURVEY_MODAL:
+      return { ...state, showSurveyDeleteModal: false };
     default:
       return state;
   }

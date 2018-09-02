@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchSurveys } from '../../../actions/surveyActions';
 import { Card, Grid, Button, Icon } from 'semantic-ui-react';
+import CustomModal from '../../../../components/custom-modal';
+import modalStyles from '../../../../components/custom-modal/styles';
+import colorsEnum from '../../../../helpers/colorsEnums';
 
-class SurveyList extends Component {
+export default class SurveyList extends Component {
   componentDidMount() {
     this.props.fetchSurveys();
   }
+
+  deleteSurvey = () => {
+    return null;
+  };
+
   renderSurveys = () => {
-    return this.props.surveys
+    return this.props.surveyList
       .reverse()
       .map(({ _id, title, body, dateSent, yes, no }) => {
         return (
@@ -31,6 +37,7 @@ class SurveyList extends Component {
                     color="red"
                     floated="right"
                     size="mini"
+                    onClick={this.props.openDeleteSurveyModal}
                   >
                     <Button.Content visible>Delete</Button.Content>
                     <Button.Content hidden>
@@ -62,16 +69,21 @@ class SurveyList extends Component {
     return (
       <Grid container stackable verticalAlign="middle">
         {this.renderSurveys()}
+        <CustomModal
+          title="Delete Survey"
+          headerIcon="trash alternate"
+          headerIconColor={colorsEnum.red}
+          showModal={this.props.showSurveyDeleteModal}
+          onCancel={this.props.closeDeleteSurveyModal}
+          onClose={this.props.closeDeleteSurveyModal}
+          onConfirm={this.deleteSurvey}
+          isOnConfirmDisabled={false}
+          isConfirmLoading={false}
+          style={modalStyles.negative}
+        >
+          Are you sure?
+        </CustomModal>
       </Grid>
     );
   }
 }
-
-const mapStateToProps = ({ surveys }) => ({
-  surveys
-});
-
-export default connect(
-  mapStateToProps,
-  { fetchSurveys }
-)(SurveyList);
