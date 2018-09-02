@@ -51,16 +51,16 @@ SurveyNew = reduxForm({
   enableReinitialize: true
 })(SurveyNew);
 
-const mapStateToProps = ({ surveys }) => {
+const mapStateToProps = ({ surveys: { surveyFormData } }) => {
   let recipients = [];
-  if (surveys[0] && surveys[0].recipients) {
-    _.each(surveys[0].recipients, ({ email }) => {
+  if (surveyFormData[0] && surveyFormData[0].recipients) {
+    _.each(surveyFormData[0].recipients, ({ email }) => {
       recipients.push(email);
     });
   }
   return {
     initialValues: {
-      ...surveys[0],
+      ...surveyFormData[0],
       recipients: recipients.join(', ')
     }
   };

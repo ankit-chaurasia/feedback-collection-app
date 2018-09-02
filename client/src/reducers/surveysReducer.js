@@ -9,6 +9,7 @@ import {
 
 const surveyDefaultState = {
   surveyList: [],
+  surveyFormData: {},
   showSurveyDeleteModal: false,
   currSurveyId: '',
   deleteSurveyPending: false
@@ -19,7 +20,7 @@ export default (state = surveyDefaultState, action) => {
     case FETCH_SURVEYS:
       return { ...state, surveyList: action.payload };
     case FETCH_SURVEY:
-      return { ...state, surveyList: action.payload };
+      return { ...state, surveyFormData: action.payload };
     case OPEN_DELETE_SURVEY_MODAL:
       return {
         ...state,
