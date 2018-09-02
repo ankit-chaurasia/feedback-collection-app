@@ -11,7 +11,11 @@ class CustomModal extends Component {
     children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     footer: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     cancelButtonText: PropTypes.string,
-    confirmButtonText: PropTypes.string,
+    confirmButtonText: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string
+    ]),
+    confirmButtonIcon: PropTypes.string,
     closeIcon: PropTypes.bool,
     onCancel: PropTypes.func,
     onConfirm: PropTypes.func,
@@ -42,7 +46,8 @@ class CustomModal extends Component {
     size: 'mini',
     isOnConfirmDisabled: false,
     isConfirmLoading: false,
-    style: modalStyles.basic
+    style: modalStyles.basic,
+    confirmButtonIcon: 'checkmark'
   };
 
   renderHeader = () => {
@@ -80,7 +85,8 @@ class CustomModal extends Component {
         disabled={this.props.isOnConfirmDisabled}
         loading={this.props.isConfirmLoading}
       >
-        <Icon name="checkmark" /> {this.props.confirmButtonText}
+        <Icon name={this.props.confirmButtonIcon} />{' '}
+        {this.props.confirmButtonText}
       </Button>
     );
     return (
@@ -94,6 +100,7 @@ class CustomModal extends Component {
   render() {
     return (
       <Modal
+        dimmer="inverted"
         closeIcon={this.props.closeIcon}
         open={this.props.showModal}
         size={this.props.size}

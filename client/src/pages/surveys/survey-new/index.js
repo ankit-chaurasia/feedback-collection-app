@@ -6,15 +6,27 @@ import SurveyForm from './survey-form';
 import SurveyFormReview from './SurveyFormReview';
 import ResponsiveContainer from '../../../components/responsive-container';
 import { fetchSurvey } from '../../../actions/surveyActions';
+import CustomModal from '../../../components/custom-modal';
+import modalStyles from '../../../components/custom-modal/styles';
+import colorsEnum from '../../../helpers/colorsEnums';
+import Payments from '../../../components/payments';
 
 class SurveyNew extends Component {
   state = {
-    showFormReview: false
+    showFormReview: false,
+    showNoCreditModal: true
   };
 
   componentDidMount() {
     this.props.fetchSurvey(this.props.match.params.surveyId);
   }
+
+  closeNoCreditModal = () => {
+    this.setState(() => ({
+      showNoCreditModal: false
+    }));
+    this.props.history.push('/');
+  };
 
   renderContent = () => {
     if (this.state.showFormReview) {
@@ -29,16 +41,34 @@ class SurveyNew extends Component {
           surveyId={this.props.match.params.surveyId}
         />
       );
+    } else if (this.props.credits) {
+      return (
+        <SurveyForm
+          onSurveySubmit={() => {
+            this.setState(() => ({
+              showFormReview: true
+            }));
+          }}
+        />
+      );
+    } else {
+      return (
+        <CustomModal
+          showModal={this.state.showNoCreditModal}
+          closeIcon={false}
+          title="Oops!! No credits"
+          headerIcon="warning sign"
+          confirmButtonText={<Payments />}
+          headerIconColor={colorsEnum.yellow}
+          onCancel={this.closeNoCreditModal}
+          onConfirm={() => {}}
+          style={modalStyles.negative}
+          confirmButtonIcon="payment"
+        >
+          You don't have enough credits to create a survey
+        </CustomModal>
+      );
     }
-    return (
-      <SurveyForm
-        onSurveySubmit={() => {
-          this.setState(() => ({
-            showFormReview: true
-          }));
-        }}
-      />
-    );
   };
 
   render() {
@@ -51,7 +81,10 @@ SurveyNew = reduxForm({
   enableReinitialize: true
 })(SurveyNew);
 
-const mapStateToProps = ({ surveys: { surveyFormData } }) => {
+const mapStateToProps = ({
+  surveys: { surveyFormData },
+  auth: { credits }
+}) => {
   let recipients = [];
   if (surveyFormData[0] && surveyFormData[0].recipients) {
     _.each(surveyFormData[0].recipients, ({ email }) => {
@@ -62,7 +95,8 @@ const mapStateToProps = ({ surveys: { surveyFormData } }) => {
     initialValues: {
       ...surveyFormData[0],
       recipients: recipients.join(', ')
-    }
+    },
+    credits
   };
 };
 
