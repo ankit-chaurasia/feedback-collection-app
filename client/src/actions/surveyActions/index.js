@@ -13,9 +13,13 @@ export const updateSurvey = (values, history) => async dispatch => {
   dispatch({ type: Actions.FETCH_USER, payload: res.data });
 };
 
-export const fetchSurveys = () => async dispatch => {
-  const res = await axios.get('/api/surveys');
-  dispatch({ type: Actions.FETCH_SURVEYS, payload: res.data });
+export const fetchSurveys = history => async dispatch => {
+  try {
+    const res = await axios.get('/api/surveys');
+    dispatch({ type: Actions.FETCH_SURVEYS, payload: res.data });
+  } catch (error) {
+    if (error.response.status === 401) history.push('/');
+  }
 };
 
 export const fetchSurvey = surveyId => async dispatch => {

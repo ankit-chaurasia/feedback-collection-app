@@ -8,7 +8,7 @@ import Payments from '../../../../components/payments';
 
 export default class SurveyList extends Component {
   componentDidMount() {
-    this.props.fetchSurveys();
+    this.props.fetchSurveys(this.props.history);
   }
 
   deleteSurvey = () => {

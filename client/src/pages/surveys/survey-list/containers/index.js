@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import {
   fetchSurveys,
   openDeleteSurveyModal,
@@ -31,4 +32,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SurveyList);
+)(withRouter(SurveyList));
