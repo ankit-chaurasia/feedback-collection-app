@@ -2,21 +2,30 @@ import { connect } from 'react-redux';
 import {
   fetchSurveys,
   openDeleteSurveyModal,
-  closeDeleteSurveyModal
+  closeDeleteSurveyModal,
+  deleteSurvey
 } from '../../../../actions/surveyActions';
 import SurveyList from '../components';
 
 const mapStateToProps = ({
-  surveys: { surveyList, showSurveyDeleteModal }
+  surveys: {
+    surveyList,
+    showSurveyDeleteModal,
+    currSurveyId,
+    deleteSurveyPending
+  }
 }) => ({
   surveyList,
-  showSurveyDeleteModal
+  showSurveyDeleteModal,
+  currSurveyId,
+  deleteSurveyPending
 });
 
 const mapDispatchToProps = {
   fetchSurveys,
   openDeleteSurveyModal,
-  closeDeleteSurveyModal
+  closeDeleteSurveyModal,
+  deleteSurvey
 };
 
 export default connect(

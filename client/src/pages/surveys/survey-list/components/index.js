@@ -11,7 +11,8 @@ export default class SurveyList extends Component {
   }
 
   deleteSurvey = () => {
-    return null;
+    const { deleteSurvey, currSurveyId } = this.props;
+    deleteSurvey(currSurveyId);
   };
 
   renderSurveys = () => {
@@ -37,7 +38,7 @@ export default class SurveyList extends Component {
                     color="red"
                     floated="right"
                     size="mini"
-                    onClick={this.props.openDeleteSurveyModal}
+                    onClick={() => this.props.openDeleteSurveyModal(_id)}
                   >
                     <Button.Content visible>Delete</Button.Content>
                     <Button.Content hidden>
@@ -77,8 +78,8 @@ export default class SurveyList extends Component {
           onCancel={this.props.closeDeleteSurveyModal}
           onClose={this.props.closeDeleteSurveyModal}
           onConfirm={this.deleteSurvey}
-          isOnConfirmDisabled={false}
-          isConfirmLoading={false}
+          isOnConfirmDisabled={this.props.deleteSurveyPending}
+          isConfirmLoading={this.props.deleteSurveyPending}
           style={modalStyles.negative}
         >
           Are you sure?

@@ -62,6 +62,15 @@ module.exports = app => {
     }
   });
 
+  app.delete('/api/survey/delete', requireLogin, async (req, res) => {
+    try {
+      const response = await Survey.deleteOne({ _id: req.query.surveyId });
+      res.send({ message: 'Survey deleted successfully.', error: false });
+    } catch (err) {
+      res.status(422).send({ message: err, error: true });
+    }
+  });
+
   app.get('/api/surveys/:surveyId/:choice', (req, res) => {
     res.send('Thanks for voting!!');
   });

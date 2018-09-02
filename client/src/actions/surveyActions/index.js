@@ -23,8 +23,15 @@ export const fetchSurvey = surveyId => async dispatch => {
   dispatch({ type: Actions.FETCH_SURVEY, payload: res.data });
 };
 
-export const openDeleteSurveyModal = () => dispatch => {
-  dispatch({ type: Actions.OPEN_DELETE_SURVEY_MODAL });
+export const deleteSurvey = surveyId => async dispatch => {
+  dispatch({ type: Actions.DELETE_SURVEY_PENDING });
+  const res = await axios.delete('api/survey/delete', { params: { surveyId } });
+  dispatch({ type: Actions.DELETE_SURVEY_SUCCESS });
+  fetchSurveys()(dispatch);
+};
+
+export const openDeleteSurveyModal = currSurveyId => dispatch => {
+  dispatch({ type: Actions.OPEN_DELETE_SURVEY_MODAL, payload: currSurveyId });
 };
 
 export const closeDeleteSurveyModal = () => dispatch => {
