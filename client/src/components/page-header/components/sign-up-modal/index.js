@@ -4,17 +4,16 @@ import { Button, Header, Divider, Form } from 'semantic-ui-react';
 import CustomModal from '../../../custom-modal';
 import modalStyles from '../../../custom-modal/styles';
 import TextInput from '../../../text-input';
-import '../../../../stylesheets/index.css';
 
-const LoginModal = props => {
-  const loginFooter = () => {
+const SignUpModal = props => {
+  const signUpFooter = () => {
     return (
       <React.Fragment>
         <Divider fitted />
         <Header>
           <Header.Content>
-            Don't have an account?{' '}
-            <a onClick={props.openSignUpModal}>Sign Up</a>
+            Already have an account?{' '}
+            <a onClick={props.openLoginModal}>Log In</a>
           </Header.Content>
         </Header>
       </React.Fragment>
@@ -23,32 +22,20 @@ const LoginModal = props => {
 
   return (
     <CustomModal
-      title="Log In to Your Emaily Account!"
-      showModal={props.showLoginModal}
-      onClose={props.closeLoginModal}
+      title="Sign Up and Start Sending Surveys!"
+      showModal={props.showSignUpModal}
+      onClose={props.closeSignUpModal}
       style={modalStyles.positive}
-      footer={loginFooter()}
+      footer={signUpFooter()}
     >
-      <Button
-        color="facebook"
-        disabled
-        fluid
-        size="large"
-        className="margin-bottom"
-        icon="facebook"
-        content="Facebook"
-      />
-      <Button
-        color="google plus"
-        fluid
-        size="large"
-        as="a"
-        href="/auth/google"
-        className="margin-bottom"
-        icon="google plus"
-        content="Google Plus"
-      />
-      <Form onSubmit={props.handleSubmit(props.onLoginSubmit)}>
+      <Form onSubmit={props.handleSubmit(props.onSignUpSubmit)}>
+        <Field
+          component={TextInput}
+          placeholder="Full Name"
+          name="fullName"
+          required={true}
+          icon="user"
+        />
         <Field
           component={TextInput}
           placeholder="Email"
@@ -69,7 +56,7 @@ const LoginModal = props => {
           size="large"
           as="a"
           color="teal"
-          content="Log In"
+          content="Sign Up"
           disabled
         />
       </Form>
@@ -84,5 +71,5 @@ const validate = values => {
 
 export default reduxForm({
   validate,
-  form: 'loginForm'
-})(LoginModal);
+  form: 'signUpForm'
+})(SignUpModal);

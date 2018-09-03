@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { Label, Container, Menu, Image } from 'semantic-ui-react';
 import Payments from '../../payments';
 import LoginModal from './login-modal';
+import SignUpModal from './sign-up-modal';
 import '../stylesheets/index.css';
 
 class PageHeaderDesktop extends Component {
   state = {
-    showLoginModal: false
+    showLoginModal: false,
+    showSignUpModal: false
   };
   renderContent = () => {
     switch (this.props.auth._id) {
@@ -23,7 +25,12 @@ class PageHeaderDesktop extends Component {
               name="Log in"
               onClick={this.openLoginModal}
             />
-            <Menu.Item link icon="signup" as="a" name="Sign Up" />
+            <Menu.Item
+              link
+              icon="signup"
+              name="Sign Up"
+              onClick={this.openSignUpModal}
+            />
           </React.Fragment>
         );
       default:
@@ -62,7 +69,8 @@ class PageHeaderDesktop extends Component {
 
   openLoginModal = () => {
     this.setState(() => ({
-      showLoginModal: true
+      showLoginModal: true,
+      showSignUpModal: false
     }));
   };
 
@@ -73,10 +81,38 @@ class PageHeaderDesktop extends Component {
   renderLoginModal = () => {
     return (
       <LoginModal
+        openSignUpModal={this.openSignUpModal}
         showLoginModal={this.state.showLoginModal}
         closeLoginModal={this.closeLoginModal}
-        openLoginModal={this.openLoginModal}
         onLoginSubmit={this.onLoginSubmit}
+      />
+    );
+  };
+
+  closeSignUpModal = () => {
+    this.setState(() => ({
+      showSignUpModal: false
+    }));
+  };
+
+  openSignUpModal = () => {
+    this.setState(() => ({
+      showSignUpModal: true,
+      showLoginModal: false
+    }));
+  };
+
+  onSignUpSubmit = () => {
+    return null;
+  };
+
+  renderSignUpModal = () => {
+    return (
+      <SignUpModal
+        openLoginModal={this.openLoginModal}
+        showSignUpModal={this.state.showSignUpModal}
+        closeSignUpModal={this.closeSignUpModal}
+        onSignUpSubmit={this.onSignUpSubmit}
       />
     );
   };
@@ -104,6 +140,7 @@ class PageHeaderDesktop extends Component {
           <Menu.Menu position="right">{this.renderContent()}</Menu.Menu>
         </Container>
         {this.renderLoginModal()}
+        {this.renderSignUpModal()}
       </Menu>
     );
   }

@@ -5,33 +5,23 @@ import '../../stylesheets/index.css';
 
 const TextInput = props => {
   const {
-    input,
-    label,
-    meta: { error, touched },
-    required,
-    placeholder,
-    icon
+    meta: { error, touched }
   } = props;
   return (
     <React.Fragment>
-      <Form.Input
-        fluid
-        label={label}
-        placeholder={placeholder}
-        {...input}
-        required={required}
-        icon={icon}
-      />
+      <Form.Input fluid {...props} />
       {touched && !!error && <span className="errorMessage">{error}</span>}
     </React.Fragment>
   );
 };
 
 TextInput.propTypes = {
+  type: PropTypes.string,
   required: PropTypes.bool
 };
 
 TextInput.defaultProps = {
+  type: 'text',
   required: false
 };
 

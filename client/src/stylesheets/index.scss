@@ -1,5 +1,13 @@
+a {
+  cursor: pointer;
+}
+
 .errorMessage {
   position: relative;
   top: -1em;
   color: #9f3a38;
+}
+
+.margin-bottom {
+  margin-bottom: 1em !important;
 }
