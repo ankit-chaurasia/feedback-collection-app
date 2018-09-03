@@ -3,9 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Label, Container, Menu, Image } from 'semantic-ui-react';
 import Payments from '../../payments';
+import LoginModal from './login-modal';
 import '../stylesheets/index.css';
 
 class PageHeaderDesktop extends Component {
+  state = {
+    showLoginModal: false
+  };
   renderContent = () => {
     switch (this.props.auth._id) {
       case null:
@@ -16,9 +20,8 @@ class PageHeaderDesktop extends Component {
             <Menu.Item
               link
               icon="sign-in"
-              as="a"
-              href="/auth/google"
               name="Log in"
+              onClick={this.openLoginModal}
             />
             <Menu.Item link icon="signup" as="a" name="Sign Up" />
           </React.Fragment>
@@ -51,6 +54,33 @@ class PageHeaderDesktop extends Component {
     }
   };
 
+  closeLoginModal = () => {
+    this.setState(() => ({
+      showLoginModal: false
+    }));
+  };
+
+  openLoginModal = () => {
+    this.setState(() => ({
+      showLoginModal: true
+    }));
+  };
+
+  onLoginSubmit = () => {
+    return null;
+  };
+
+  renderLoginModal = () => {
+    return (
+      <LoginModal
+        showLoginModal={this.state.showLoginModal}
+        closeLoginModal={this.closeLoginModal}
+        openLoginModal={this.openLoginModal}
+        onLoginSubmit={this.onLoginSubmit}
+      />
+    );
+  };
+
   render() {
     const { fixed } = this.props;
     return (
@@ -73,6 +103,7 @@ class PageHeaderDesktop extends Component {
           </Menu.Item>
           <Menu.Menu position="right">{this.renderContent()}</Menu.Menu>
         </Container>
+        {this.renderLoginModal()}
       </Menu>
     );
   }

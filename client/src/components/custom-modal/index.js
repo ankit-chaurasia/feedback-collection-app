@@ -8,7 +8,11 @@ import colorsEnum from '../../helpers/colorsEnums';
 class CustomModal extends Component {
   static propTypes = {
     showModal: PropTypes.bool,
-    children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+    children: PropTypes.oneOfType([
+      PropTypes.element,
+      PropTypes.string,
+      PropTypes.node
+    ]),
     footer: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     cancelButtonText: PropTypes.string,
     confirmButtonText: PropTypes.oneOfType([
@@ -100,7 +104,6 @@ class CustomModal extends Component {
   render() {
     return (
       <Modal
-        dimmer="inverted"
         closeIcon={this.props.closeIcon}
         open={this.props.showModal}
         size={this.props.size}

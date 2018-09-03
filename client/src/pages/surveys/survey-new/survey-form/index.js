@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { reduxForm, Field } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { Form, Button } from 'semantic-ui-react';
-import SurveyField from './SurveyField';
+import TextInput from '../../../../components/text-input';
 import validateEmails from '../../../../utils/validateEmails';
 import formFields from '../utils/formFields';
 
@@ -12,10 +12,11 @@ class SurveyForm extends Component {
     _.map(formFields, ({ label, name }) => (
       <Field
         key={name}
-        component={SurveyField}
+        component={TextInput}
         type="text"
         label={label}
         name={name}
+        placeholder={label}
       />
     ));
 
