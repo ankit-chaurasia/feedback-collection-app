@@ -70,9 +70,10 @@ const LoginModal = props => {
             fluid
             size="large"
             as={Link}
-            to="/surveys"
+            to=""
             color="teal"
             content="Log In"
+            disabled
           />
         </Form.Group>
       </Form>
@@ -82,16 +83,6 @@ const LoginModal = props => {
 
 const validate = values => {
   const errors = {};
-  //   const recipients =
-  //     values.recipients && values.recipients[0] && values.recipients[0].email
-  //       ? values.recipients[0].email
-  //       : values.recipients;
-  //   errors.recipients = validateEmails(recipients || '');
-  //   _.each(formFields, ({ name }) => {
-  //     if (!values[name]) {
-  //       errors[name] = 'You must provide a value';
-  //     }
-  //   });
   return errors;
 };
 
