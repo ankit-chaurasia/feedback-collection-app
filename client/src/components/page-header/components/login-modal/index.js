@@ -31,9 +31,10 @@ const LoginModal = props => {
     >
       <Button
         color="facebook"
-        disabled
         fluid
         size="large"
+        as="a"
+        href="/auth/facebook"
         className="margin-bottom"
         icon="facebook"
         content="Facebook"

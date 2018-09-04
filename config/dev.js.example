@@ -1,6 +1,8 @@
 module.exports = {
   googleClientID: GOOGLE_CLIENT_ID,
   googleClientSecret: GOOGLE_CLIENT_SECRET,
+  facebookAppID: FACEBOOK_APP_ID,
+  facebookAppSecret: FACEBOOK_APP_SECRET,
   mongoURI: MONGO_URI,
   cookieKey: COOKIE_KEY,
   stripePublishableKey: STRIPE_PUBLISHABLE_KEY,
