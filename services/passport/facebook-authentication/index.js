@@ -10,6 +10,7 @@ module.exports = passport => {
         clientID: keys.facebookAppID,
         clientSecret: keys.facebookAppSecret,
         callbackURL: '/auth/facebook/callback',
+        profileFields: ['id', 'displayName', 'photos', 'email'],
         proxy: true
       },
       async (accessToken, refreshToken, profile, done) => {
@@ -17,7 +18,12 @@ module.exports = passport => {
         if (existingUser) {
           return done(null, existingUser);
         }
-        const user = await new User({ facebookId: profile.id }).save();
+        const user = await new User({
+          facebookId: profile.id,
+          fullName: profile.displayName,
+          email: profile.emails[0].value,
+          profileImageUrl: profile.photos[0].value
+        }).save();
         done(null, user);
       }
     )
