@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Button, Header, List, Icon } from 'semantic-ui-react';
-import formFields from './utils/formFields';
+import surveyFormFields from './utils/surveyFormFields';
 import { createSurvey, updateSurvey } from '../../../actions/surveyActions';
 import './stylesheets/index.css';
 
@@ -17,7 +17,7 @@ const SurveyFormReview = ({
   mode,
   surveyId
 }) => {
-  const reviewFields = _.map(formFields, ({ label, name }) => {
+  const reviewFields = _.map(surveyFormFields, ({ label, name }) => {
     return (
       <List.Item key={name} className="listItem">
         <List.Content floated="right">{formValues[name]}</List.Content>

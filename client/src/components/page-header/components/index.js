@@ -102,17 +102,12 @@ class PageHeaderDesktop extends Component {
     }));
   };
 
-  onSignUpSubmit = () => {
-    return null;
-  };
-
   renderSignUpModal = () => {
     return (
       <SignUpModal
         openLoginModal={this.openLoginModal}
         showSignUpModal={this.state.showSignUpModal}
         closeSignUpModal={this.closeSignUpModal}
-        onSignUpSubmit={this.onSignUpSubmit}
       />
     );
   };

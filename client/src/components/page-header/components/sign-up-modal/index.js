@@ -1,9 +1,18 @@
 import React from 'react';
+import _ from 'lodash';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { Button, Header, Divider, Form } from 'semantic-ui-react';
 import CustomModal from '../../../custom-modal';
 import modalStyles from '../../../custom-modal/styles';
 import TextInput from '../../../text-input';
+import {
+  emailValidator,
+  passwordValidator
+} from '../../../../utils/validators';
+import signUpFormFields from './signUpFormFields';
+import { createUser } from '../../../../actions/userActions';
 
 const SignUpModal = props => {
   const signUpFooter = () => {
@@ -20,6 +29,19 @@ const SignUpModal = props => {
     );
   };
 
+  const renderFields = () =>
+    _.map(signUpFormFields, ({ label, name, placeholder, type, required }) => (
+      <Field
+        key={name}
+        component={TextInput}
+        type={type}
+        label={label}
+        name={name}
+        placeholder={placeholder}
+        required={required}
+      />
+    ));
+
   return (
     <CustomModal
       title="Sign Up and Start Sending Surveys!"
@@ -28,36 +50,17 @@ const SignUpModal = props => {
       style={modalStyles.positive}
       footer={signUpFooter()}
     >
-      <Form onSubmit={props.handleSubmit(props.onSignUpSubmit)}>
-        <Field
-          component={TextInput}
-          placeholder="Full Name"
-          name="fullName"
-          required={true}
-          icon="user"
-        />
-        <Field
-          component={TextInput}
-          placeholder="Email"
-          name="email"
-          required={true}
-          icon="mail"
-        />
-        <Field
-          component={TextInput}
-          placeholder="Password"
-          name="password"
-          required={true}
-          icon="lock"
-          type="password"
-        />
+      <Form onSubmit={props.handleSubmit(() => {})} noValidate>
+        {renderFields()}
         <Button
+          type="submit"
           fluid
           size="large"
-          as="a"
           color="teal"
           content="Sign Up"
-          disabled
+          onClick={() =>
+            props.createUser(props.formValues.values, props.history)
+          }
         />
       </Form>
     </CustomModal>
@@ -66,10 +69,26 @@ const SignUpModal = props => {
 
 const validate = values => {
   const errors = {};
+  errors.email = emailValidator(values.email || '');
+  errors.password = passwordValidator(values.password || '');
+  _.each(signUpFormFields, ({ name }) => {
+    if (!values[name]) {
+      errors[name] = 'You must provide a value';
+    }
+  });
   return errors;
 };
 
-export default reduxForm({
+const SignUpModalForm = reduxForm({
   validate,
   form: 'signUpForm'
 })(SignUpModal);
+
+const mapStateToProps = ({ form }) => {
+  return { formValues: form.signUpForm };
+};
+
+export default connect(
+  mapStateToProps,
+  { createUser }
+)(withRouter(SignUpModalForm));

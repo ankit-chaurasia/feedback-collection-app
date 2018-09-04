@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { Form, Button } from 'semantic-ui-react';
 import TextInput from '../../../../components/text-input';
 import validateEmails from '../../../../utils/validateEmails';
-import formFields from '../utils/formFields';
+import surveyFormFields from '../utils/surveyFormFields';
 
 class SurveyForm extends Component {
   renderFields = () =>
-    _.map(formFields, ({ label, name }) => (
+    _.map(surveyFormFields, ({ label, name }) => (
       <Field
         key={name}
         component={TextInput}
@@ -22,7 +22,7 @@ class SurveyForm extends Component {
 
   render() {
     return (
-      <Form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
+      <Form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)} noValidate>
         {this.renderFields()}
         <Form.Group style={{ display: 'inherit' }}>
           <Link to="/surveys">
@@ -49,7 +49,7 @@ const validate = values => {
       ? values.recipients[0].email
       : values.recipients;
   errors.recipients = validateEmails(recipients || '');
-  _.each(formFields, ({ name }) => {
+  _.each(surveyFormFields, ({ name }) => {
     if (!values[name]) {
       errors[name] = 'You must provide a value';
     }

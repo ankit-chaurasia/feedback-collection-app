@@ -1,9 +1,10 @@
-const emailRegex = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+import { emailValidator } from './validators';
+
 export default emails => {
   const invalidEmails = emails
     .split(',')
     .map(email => email.trim())
-    .filter(email => !emailRegex.test(email));
+    .filter(email => !!emailValidator(email));
   if (invalidEmails.length) {
     return `These emails are invalid: ${invalidEmails}`;
   }
