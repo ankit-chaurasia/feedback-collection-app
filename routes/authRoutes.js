@@ -78,7 +78,12 @@ module.exports = app => {
           email,
           password
         }).save();
-        res.status(status.OK.code).send(user);
+        req.login(user, err => {
+          if (err) {
+            return next(err);
+          }
+          res.status(status.OK.code).send(user);
+        });
       }
     } catch (err) {
       return res.send(err);
