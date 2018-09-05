@@ -1,4 +1,7 @@
 const passport = require('passport');
+const mongoose = require('mongoose');
+const User = mongoose.model('users');
+const status = require('./responses/status');
 
 module.exports = app => {
   app.get(
@@ -38,5 +41,28 @@ module.exports = app => {
 
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
+  });
+
+  app.post('/api/signup', async (req, res) => {
+    const { fullName, email, password } = req.body;
+    try {
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+        res.status(status.OK.code).send({
+          error: true,
+          errorField: 'email',
+          message: 'This email is already taken.'
+        });
+      } else {
+        const user = await new User({
+          fullName,
+          email,
+          password
+        }).save();
+        res.status(status.OK.code).send(user);
+      }
+    } catch (err) {
+      return res.send(err);
+    }
   });
 };

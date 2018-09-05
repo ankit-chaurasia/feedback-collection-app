@@ -8,6 +8,11 @@ export const fetchUser = () => async dispatch => {
 
 export const createUser = (values, history) => async dispatch => {
   const res = await axios.post('/api/signup', values);
-  history.push('/surveys');
-  dispatch({ type: FETCH_USER, payload: res.data });
+  const { data } = res;
+  if (data.error) {
+    console.log('message', data.message);
+  } else {
+    dispatch({ type: FETCH_USER, payload: res.data });
+    history.push('/surveys');
+  }
 };
