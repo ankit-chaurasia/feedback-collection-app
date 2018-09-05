@@ -34,16 +34,21 @@ module.exports = app => {
     }
   );
 
-  app.post('/auth/login', function(req, res, next) {
-    passport.authenticate('local', function(err, user, info) {
+  app.post('/auth/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
       if (err) {
         return next(err);
       }
       if (!user) {
-        res.status(401).send(info);
+        res.status(status.UNAUTHORIZED.code).send(info);
         return;
       }
-      res.send(user);
+      req.login(user, err => {
+        if (err) {
+          return next(err);
+        }
+        res.send(user);
+      });
     })(req, res, next);
   });
 
@@ -65,7 +70,7 @@ module.exports = app => {
           error: true,
           errorType: 'field',
           errorFieldName: 'email',
-          message: 'This email is already taken.'
+          message: 'This email is already taken. Please try with another one.'
         });
       } else {
         const user = await new User({

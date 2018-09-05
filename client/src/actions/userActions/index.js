@@ -7,6 +7,7 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const createUser = (values, history) => async dispatch => {
+  values.email = values.email.toLocaleLowerCase();
   const res = await axios.post('/api/signup', values);
   const { data } = res;
   if (data.error) {
@@ -18,6 +19,7 @@ export const createUser = (values, history) => async dispatch => {
 };
 
 export const logInUser = (values, history) => async dispatch => {
+  values.email = values.email.toLocaleLowerCase();
   try {
     const res = await axios.post('/auth/login', values);
     dispatch({ type: FETCH_USER, payload: res.data });

@@ -26,7 +26,8 @@ module.exports = passport => {
           if (existingUser.password !== password) {
             return done(null, false, {
               error: true,
-              errorType: 'form',
+              errorType: 'field',
+              errorFieldName: 'password',
               message: 'Please enter a valid password and try again.'
             });
           }
