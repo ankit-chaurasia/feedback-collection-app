@@ -12,3 +12,4 @@ passport.deserializeUser((id, done) => {
 
 require('./google-authentication')(passport);
 require('./facebook-authentication')(passport);
+require('./local-authentication')(passport);

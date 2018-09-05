@@ -34,6 +34,19 @@ module.exports = app => {
     }
   );
 
+  app.post('/auth/login', function(req, res, next) {
+    passport.authenticate('local', function(err, user, info) {
+      if (err) {
+        return next(err);
+      }
+      if (!user) {
+        res.status(401).send(info);
+        return;
+      }
+      res.send(user);
+    })(req, res, next);
+  });
+
   app.get('/api/logout', (req, res) => {
     req.logout();
     res.redirect('/');
@@ -50,7 +63,8 @@ module.exports = app => {
       if (existingUser) {
         res.status(status.OK.code).send({
           error: true,
-          errorField: 'email',
+          errorType: 'field',
+          errorFieldName: 'email',
           message: 'This email is already taken.'
         });
       } else {

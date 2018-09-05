@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { Button, Header, Divider, Form } from 'semantic-ui-react';
 import CustomModal from '../../../custom-modal';
 import modalStyles from '../../../custom-modal/styles';
 import TextInput from '../../../text-input';
 import '../../../../stylesheets/index.css';
+import { logInUser } from '../../../../actions/userActions';
 
 const LoginModal = props => {
   const loginFooter = () => {
@@ -71,7 +74,9 @@ const LoginModal = props => {
           as="a"
           color="teal"
           content="Log In"
-          disabled
+          onClick={() =>
+            props.logInUser(props.formValues.values, props.history)
+          }
         />
       </Form>
     </CustomModal>
@@ -83,7 +88,16 @@ const validate = values => {
   return errors;
 };
 
-export default reduxForm({
+const LoginModalForm = reduxForm({
   validate,
   form: 'loginForm'
 })(LoginModal);
+
+const mapStateToProps = ({ form }) => {
+  return { formValues: form.loginForm };
+};
+
+export default connect(
+  mapStateToProps,
+  { logInUser }
+)(withRouter(LoginModalForm));
