@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 import { FETCH_USER } from '../actionTypes';
 
 export const fetchUser = () => async dispatch => {
@@ -7,24 +8,23 @@ export const fetchUser = () => async dispatch => {
 };
 
 export const createUser = (values, history) => async dispatch => {
-  values.email = values.email.toLocaleLowerCase();
-  const res = await axios.post('/api/signup', values);
-  const { data } = res;
-  if (data.error) {
-    console.log('message', data.message);
-  } else {
+  values.email = _.trim(values.email.toLocaleLowerCase());
+  try {
+    const res = await axios.post('/api/signup', values);
     dispatch({ type: FETCH_USER, payload: res.data });
     history.push('/surveys');
+  } catch ({ response }) {
+    return response;
   }
 };
 
 export const logInUser = (values, history) => async dispatch => {
-  values.email = values.email.toLocaleLowerCase();
+  values.email = _.trim(values.email.toLocaleLowerCase());
   try {
     const res = await axios.post('/auth/login', values);
     dispatch({ type: FETCH_USER, payload: res.data });
     history.push('/surveys');
   } catch ({ response }) {
-    if (response.status === 401) history.push('/');
+    return response;
   }
 };

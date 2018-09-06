@@ -5,12 +5,14 @@ import '../../stylesheets/index.css';
 
 const TextInput = props => {
   const {
-    meta: { error, touched }
+    meta: { touched, error, warning }
   } = props;
   return (
     <React.Fragment>
       <Form.Input fluid {...props} />
-      {touched && !!error && <span className="errorMessage">{error}</span>}
+      {touched &&
+        ((error && <span className="errorMessage">{error}</span>) ||
+          (warning && <span className="warningMessage">{warning}</span>))}
     </React.Fragment>
   );
 };

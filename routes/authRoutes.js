@@ -66,11 +66,11 @@ module.exports = app => {
     try {
       const existingUser = await User.findOne({ email });
       if (existingUser) {
-        res.status(status.OK.code).send({
+        res.status(status.UNPROCESSABLE_ENTITY.code).send({
           error: true,
           errorType: 'field',
           errorFieldName: 'email',
-          message: 'This email is already taken. Please try with another one.'
+          message: 'This email is already taken. Please try again with another one.'
         });
       } else {
         const user = await new User({

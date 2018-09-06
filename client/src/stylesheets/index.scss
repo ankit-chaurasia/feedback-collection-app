@@ -3,9 +3,17 @@ a {
 }
 
 .errorMessage {
+  color: #9f3a38;
+}
+
+.warningMessage {
+  color: #573a08;
+}
+
+.warningMessage,
+.errorMessage {
   position: relative;
   top: -1em;
-  color: #9f3a38;
 }
 
 .margin-bottom {
